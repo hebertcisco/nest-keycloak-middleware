@@ -1,3 +1,9 @@
+[![codecov](https://codecov.io/gh/hebertcisco/nest-keycloak-middleware/branch/master/graph/badge.svg?token=E11YWYCJ5Q)](https://codecov.io/gh/hebertcisco/nest-keycloak-middleware)
+
+[![Node.js build and publish package](https://github.com/hebertcisco/nest-keycloak-middleware/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/hebertcisco/nest-keycloak-middleware/actions/workflows/npm-publish.yml)
+
+[![Running Code Coverage](https://github.com/hebertcisco/nest-keycloak-middleware/actions/workflows/coverage.yml/badge.svg)](https://github.com/hebertcisco/nest-keycloak-middleware/actions/workflows/coverage.yml)
+
 ## Installation
 
 > Install with yarn or npm: `yarn` or `npm`:
