@@ -10,6 +10,7 @@ import { mockAccessToken } from '../tests/mock/tokens';
 describe('KeycloakService', () => {
   let service: KeycloakService;
   let accessToken: AccessToken;
+  let keycloakServiceMock: KeycloakServiceMock;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -23,6 +24,7 @@ describe('KeycloakService', () => {
 
     service = module.get<KeycloakService>(KeycloakService);
     accessToken = new AccessToken(mockConfig, mockAxiosInstance);
+    keycloakServiceMock = new KeycloakServiceMock(mockConfig);
   });
 
   beforeEach(async () => {
@@ -47,6 +49,13 @@ describe('KeycloakService', () => {
     it('should call the endpoint at least once', async () => {
       await accessToken.refresh(mockAccessToken);
       expect(mockAxiosInstance._postCalls).toBeGreaterThanOrEqual(1);
+    });
+  });
+
+  describe('KeycloakService', () => {
+    it('should write a teste here', async () => {
+      const ctx = service.createKeycloakCtx();
+      expect(ctx.accessToken).toBe(undefined);
     });
   });
 });

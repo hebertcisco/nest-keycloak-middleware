@@ -1,7 +1,3 @@
-import AccessToken from 'keycloak-middleware-ts/lib/AccessToken';
-import Jwt from 'keycloak-middleware-ts/lib/Jwt';
-import UserManager from 'keycloak-middleware-ts/lib/UserManager';
-
 import type { KeycloakConfig } from '../../lib/interfaces';
 
 export class KeycloakServiceMock {
@@ -17,12 +13,8 @@ export class KeycloakServiceMock {
   public secureKeyFormat(key: string): string {
     return key;
   }
-  public createKeycloakCtx(request?: any): {
-    jwt: Jwt;
-    users: UserManager;
-    accessToken: AccessToken;
-  } {
+  public createKeycloakCtx(request?: any) {
     void request;
-    throw new Error('Method not implemented.');
+    return jest.fn();
   }
 }
