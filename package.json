@@ -1,7 +1,7 @@
 {
   "name": "nest-keycloak-middleware",
-  "version": "0.0.2",
   "description": "Keycloak utilities module based on the keycloak-middleware-ts package 🔑",
+  "version": "0.0.2",
   "author": "Hebert Cisco",
   "license": "MIT",
   "url": "https://github.com/hebertcisco/nest-keycloak-middleware#readme",
