@@ -5,7 +5,7 @@ import { KeycloakServiceMock } from '../tests/mock/KeycloakService.mock';
 import { KeycloakService } from './keycloak.service';
 
 import { mockConfig, mockAxiosInstance } from '../tests/setup';
-import { mockAccessToken } from '../tests/mock/tokens';
+import { mockAccessToken, validAccessToken } from '../tests/mock/tokens';
 
 describe('KeycloakService', () => {
   let service: KeycloakService;
@@ -23,10 +23,6 @@ describe('KeycloakService', () => {
 
     service = module.get<KeycloakService>(KeycloakService);
     accessToken = new AccessToken(mockConfig, mockAxiosInstance);
-  });
-
-  beforeEach(async () => {
-    mockAxiosInstance.refresh();
   });
 
   describe('AccessToken.info', () => {
@@ -48,5 +44,18 @@ describe('KeycloakService', () => {
       await accessToken.refresh(mockAccessToken);
       expect(mockAxiosInstance._postCalls).toBeGreaterThanOrEqual(1);
     });
+  });
+
+  describe('KeycloakService', () => {
+    it('Should validate the .post() token', async () => {
+      const token = await mockAxiosInstance.post('token');
+      expect(String(token.data?.access_token)).toBe(validAccessToken);
+    });
+  });
+  afterEach(() => {
+    mockAxiosInstance.refresh();
+  });
+  afterEach(() => {
+    mockAxiosInstance.refresh();
   });
 });

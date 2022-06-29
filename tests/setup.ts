@@ -1,5 +1,7 @@
 import { KeycloakConfig } from 'keycloak-middleware-ts/lib/interfaces';
 import { cert } from './mock/cert';
+import { chance } from './mock/chance';
+import { expiredToken, validAccessToken } from './mock/tokens';
 
 export const mockConfig: KeycloakConfig = {
   realm: 'test',
@@ -11,7 +13,7 @@ export const mockConfig: KeycloakConfig = {
   jwtKeyAlgorithms: ['ES512'],
 };
 
-class MockAxios {
+export class MockAxios {
   _getCalls = 0;
   _putCalls = 0;
   _postCalls = 0;
@@ -21,21 +23,24 @@ class MockAxios {
     return Promise.resolve(null);
   }
 
-  async post(endpoint: string) {
+  async post(endpoint: string): Promise<any> {
     this._postCalls++;
 
     if (endpoint.includes('token'))
-      return Promise.resolve({ data: { refresh_token: '', access_token: '' } });
+      return Promise.resolve({
+        data: { refresh_token: expiredToken, access_token: validAccessToken },
+        headers: { location: '/token' },
+      });
 
     return Promise.resolve({
       data: {
         sub: 0,
         email_verified: true,
-        name: '',
-        preferred_username: '',
-        given_name: '',
-        family_name: '',
-        email: '',
+        name: chance.name(),
+        preferred_username: chance.name(),
+        given_name: chance.name_suffix(),
+        family_name: chance.name_prefix(),
+        email: chance.email(),
       },
       headers: { location: '/1' },
     });
